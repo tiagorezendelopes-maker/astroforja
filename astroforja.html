@@ -863,7 +863,7 @@ function registraRanking(nome) {
   enviaRanking({ modo: 'classico', apelido: nome, pontos: J.pontos, semente: J.semente, toques: J.toques.length });
 }
 // ranking geral: Apps Script do professor (mesmo esquema do Esquadrilha v2). Vazio = só neste aparelho.
-const RANK_URL = '';
+const RANK_URL = 'https://script.google.com/macros/s/AKfycbyesAiEWbNPQ8mkTiUX3M6OPjrU4UCyGwcY2oFf4uBxsfYGSCGjzs_TUPwQO3IM6bEZXg/exec';   // planilha do professor (lição 88)
 let rankOnline = { classico: null, fases: null };
 function enviaRanking(dados) { if (!RANK_URL) return; fetch(RANK_URL, { method: 'POST', body: JSON.stringify(dados) }).then(() => buscaRanking()).catch(() => {}); }
 function buscaRanking() { if (!RANK_URL) return; for (const m of ['classico', 'fases']) fetch(RANK_URL + '?modo=' + m).then(r => r.json()).then(l => { if (Array.isArray(l)) rankOnline[m] = l; }).catch(() => {}); }
